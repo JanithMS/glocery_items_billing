@@ -1,9 +1,11 @@
 import React from 'react'
 import AddItemForm from './AddItemForm'
 import BillTable from './BillTable'
+import UsersData from './UsersData'
 
 
-function Bill () {
+function Bill (probs) {
+    //const temp = 0;
     const [gloceryItems, setGloceryItems] = React.useState([])
     const [itemDetails, setItem] = React.useState([])
     const [error, setError] = React.useState([{itemError:"", quantityError:"",priceError:""}])
@@ -53,6 +55,7 @@ function Bill () {
     if(gloceryItems.length !== 0) {
         return (
             <div>
+                {probs.isUser && <UsersData temp={0}/>}
                 <BillTable gloceryItems={gloceryItems}/>
                 <AddItemForm 
                     handleChange={handleChange}
@@ -62,10 +65,13 @@ function Bill () {
         )
     } else {
         return (
-            <AddItemForm 
-            handleChange={handleChange}
-            handleAddClick ={handleAddClick}
-            error={error}/>
+            <div>
+                {probs.isUser && <UsersData temp={0}/>}
+                <AddItemForm 
+                handleChange={handleChange}
+                handleAddClick ={handleAddClick}
+                error={error}/>
+            </div>
         )
     }
 

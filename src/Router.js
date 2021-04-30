@@ -1,7 +1,6 @@
 import Navbar from './components/Navbar';
 import {BrowserRouter, Route,Switch} from 'react-router-dom';
 import Bill from './components/Bill';
-import UsersBill from './components/UsersBill';
 
 
 function Router() {
@@ -13,11 +12,11 @@ function Router() {
             <Switch>
               <Route exact path="/" >
                 <h1>Bill</h1>
-                <Bill/>
+                <Bill isUser={false}/>
               </Route>
               <Route exact path="/usersbill">
                 <h1>Users Bill</h1>
-                <UsersBill/>
+                <Bill isUser={true}/>
               </Route>
             </Switch>
         </div>
