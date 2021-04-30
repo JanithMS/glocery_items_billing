@@ -5,9 +5,8 @@ import UsersData from './UsersData'
 
 
 function Bill (probs) {
-    //const temp = 0;
     const [gloceryItems, setGloceryItems] = React.useState([])
-    const [itemDetails, setItem] = React.useState([])
+    const [itemDetails, setItem] = React.useState({item: '',quantity: '',price: ''})
     const [error, setError] = React.useState([{itemError:"", quantityError:"",priceError:""}])
 
     const handleChange = event => {
@@ -49,6 +48,7 @@ function Bill (probs) {
             const newGloceryItems = [...gloceryItems, itemDetailswithAmount]
             setGloceryItems(newGloceryItems)
             setError({itemError:"", quantityError:"",priceError:""})
+            setItem({item: '',quantity: '',price: ''})
         }
     }
 
@@ -60,6 +60,7 @@ function Bill (probs) {
                 <AddItemForm 
                     handleChange={handleChange}
                     handleAddClick ={handleAddClick}
+                    itemDetails={itemDetails}
                     error={error}/>
             </div>
         )
@@ -70,6 +71,7 @@ function Bill (probs) {
                 <AddItemForm 
                 handleChange={handleChange}
                 handleAddClick ={handleAddClick}
+                itemDetails={itemDetails}
                 error={error}/>
             </div>
         )
