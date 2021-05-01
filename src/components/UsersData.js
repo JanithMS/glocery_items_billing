@@ -1,7 +1,11 @@
 import React from 'react'
 
 function UsersData (probs) {
+console.log(probs.userState)
 
+    if (probs.userState.isPending) return (<div>Loading...</div>)
+    if (probs.userState.errorUser) return (<div>{probs.userState.errorUser}</div>)
+    if (!probs.userState.user && !probs.userState.isPending && !probs.userState.errorUser) return(<div>No Data Found</div>)
     if (probs.userState.user) return (
         <div>
         <p>Name: {probs.userState.user.userName}</p>

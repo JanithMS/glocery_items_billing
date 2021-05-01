@@ -2,6 +2,7 @@ import React from 'react'
 import AddItemForm from './AddItemForm'
 import BillTable from './BillTable'
 import getUser from '../server/users';
+import generatePDF from '../Utils/pdf'
 import UsersData from './UsersData'
 
 
@@ -29,8 +30,9 @@ function Bill (probs) {
                 })
             }
         }
-        fetchData()
-    }, [])
+        if(probs.isUser === true) fetchData()
+        else setUserState({user: null, isPending: false, error: null})
+    },[probs.isUser])
 
     const handleChange = event => {
         setItem((itemDetails) => ({
@@ -86,6 +88,7 @@ function Bill (probs) {
                     handleAddClick ={handleAddClick}
                     itemDetails={itemDetails}
                     error={error}/>
+                <button onClick={() => generatePDF(gloceryItems, userState.user, probs.isUser)}>Generate Invoice</button>
             </div>
         )
     } else {
