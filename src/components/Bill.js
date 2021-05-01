@@ -1,6 +1,7 @@
 import React from 'react'
 import AddItemForm from './AddItemForm'
 import BillTable from './BillTable'
+import getUser from '../server/users';
 import UsersData from './UsersData'
 
 
@@ -8,6 +9,28 @@ function Bill (probs) {
     const [gloceryItems, setGloceryItems] = React.useState([])
     const [itemDetails, setItem] = React.useState({item: '',quantity: '',price: ''})
     const [error, setError] = React.useState([{itemError:"", quantityError:"",priceError:""}])
+
+    const [userState, setUserState] = React.useState({user:null,isPending:true,error:null});
+
+    React.useEffect(() => {
+        async function fetchData() {
+            try {
+                const jsonOBJ = await getUser()
+                setUserState({
+                    user:jsonOBJ,
+                    isPending:false,
+                    error:null
+                })
+            } catch (e) {
+                setUserState({
+                    user:null,
+                    isPending:false,
+                    error:e
+                })
+            }
+        }
+        fetchData()
+    }, [])
 
     const handleChange = event => {
         setItem((itemDetails) => ({
@@ -55,7 +78,8 @@ function Bill (probs) {
     if(gloceryItems.length !== 0) {
         return (
             <div>
-                {probs.isUser && <UsersData temp={0}/>}
+                {probs.isUser && <UsersData 
+                    userState={userState}/>}
                 <BillTable gloceryItems={gloceryItems}/>
                 <AddItemForm 
                     handleChange={handleChange}
@@ -67,7 +91,8 @@ function Bill (probs) {
     } else {
         return (
             <div>
-                {probs.isUser && <UsersData temp={0}/>}
+                {probs.isUser && <UsersData 
+                    userState={userState}/>}
                 <AddItemForm 
                 handleChange={handleChange}
                 handleAddClick ={handleAddClick}
