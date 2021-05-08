@@ -7,6 +7,8 @@ const generatePDF = (gloceryItems, user, isUser) => {
   let startYTable = 15;
 
   if(isUser) {
+    doc.setTextColor('black')
+    doc.setFontSize(14)
     doc.text(user.userName, 15, 15)
     doc.text('Date of Birth: '+user.dateString,15,20)
     doc.text(user.streetAddress+', '+user.city+',',15,25)
@@ -16,8 +18,7 @@ const generatePDF = (gloceryItems, user, isUser) => {
     startYTable = 50;
   }
 
-  doc.text("Bill",75,startYTable-5)
-  //doc.extractImageFromDataUrl(user.photo)
+  doc.text("Bill",80,startYTable-5,{align:"center"})
   const tableColumn = ["Item Name", "Quantity", "Price", "Amount"];
   const tableRows = [];
   let netTotal = 0;
