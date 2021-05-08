@@ -34,7 +34,7 @@ const generatePDF = (gloceryItems, user, isUser) => {
     ];
     tableRows.push(itemData);
   });
-  tableRows.push([,,'Net Price','Rs.' + netTotal])
+  tableRows.push(['','','Net Price','Rs.' + netTotal])
   doc.autoTable(tableColumn, tableRows, { startY: startYTable });
   //doc.text(`${netTotal}`, 40,40);
   doc.save(`Invoice.pdf`);

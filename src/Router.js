@@ -20,7 +20,7 @@ function Router() {
               </Route>
             </Switch>
         </div>
-        </div>
+      </div>
     </BrowserRouter>
   )
 }

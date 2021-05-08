@@ -79,7 +79,7 @@ function Bill (probs) {
 
     if(gloceryItems.length !== 0) {
         return (
-            <div>
+            <div className='bill'>
                 {probs.isUser && <UsersData 
                     userState={userState}/>}
                 <BillTable gloceryItems={gloceryItems}/>
@@ -88,7 +88,7 @@ function Bill (probs) {
                     handleAddClick ={handleAddClick}
                     itemDetails={itemDetails}
                     error={error}/>
-                <button onClick={() => generatePDF(gloceryItems, userState.user, probs.isUser)}>Generate Invoice</button>
+                <button className='generate-invoice-button' onClick={() => generatePDF(gloceryItems, userState.user, probs.isUser)}>Generate Invoice</button>
             </div>
         )
     } else {
